@@ -4,6 +4,7 @@ import { Container, Segment, Image } from 'semantic-ui-react'
 import Landing from "./pages/Landing" 
 import LinkDevice from './pages/LinkDevice'
 import NewPlan from './pages/NewPlan'
+import ActivePlans from './pages/ActivePlans'
 
 import logo from './logo.svg';
 import './App.css';
