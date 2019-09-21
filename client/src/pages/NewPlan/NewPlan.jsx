@@ -1,8 +1,6 @@
 import React from 'react'
-import {
-    Card, CardImg, CardText, CardBody,
-    CardTitle, CardSubtitle, Button, Form, FormGroup, Label, Input, FormText
-  } from 'reactstrap';
+import { Button, Card, Image } from 'semantic-ui-react'
+
 import styled from 'styled-components';
 import Toggle from 'react-bootstrap-toggle';
 
