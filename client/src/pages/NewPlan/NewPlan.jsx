@@ -1,8 +1,9 @@
 import React from 'react'
-import { Button, Card, Image } from 'semantic-ui-react'
+import { Checkbox, Icon, Segment, Container, Header } from 'semantic-ui-react'
 
 import styled from 'styled-components';
-import Toggle from 'react-bootstrap-toggle';
+
+import Option from './Option'
 
 const PlanBox = styled.button`
   border: 1px solid lightgrey;
@@ -40,66 +41,21 @@ export default class NewPlan extends React.Component {
       const { plan } = this.state;
 
       return (
-        <div>
-        <Card>
-          <CardBody>
-            <CardTitle>New Plan</CardTitle>
-            <CardSubtitle>Choose Your Plan</CardSubtitle>
-            <FlexColumn>
-       
-
-              <FlexRow>
-                <PlanBox onClick={() => {
-                  this.handlePlanClicked(1)
-                }} style={{ background: plan === 1 ? 'lightgrey' : '' }}>
-                  <FlexColumn>
-                    <div>My3</div>
-                    <div>$10</div>
-                  </FlexColumn>
-                </PlanBox>
-
-                <PlanBox onClick={() => {
-                  this.handlePlanClicked(2)
-                }} style={{ background: plan === 2 ? 'lightgrey' : '' }}>
-                  <FlexColumn>
-                    <div>My5</div>
-                    <div>$20</div>
-                  </FlexColumn>
-                </PlanBox>
-
-                <PlanBox onClick={() => {
-                  this.handlePlanClicked(3)
-                }} style={{ background: plan === 3 ? 'lightgrey' : '' }}>
-                  <FlexColumn>
-                    <div>My10</div>
-                    <div>$30</div>
-                  </FlexColumn>
-                </PlanBox>
-        
-            </FlexRow>
-
-                <FlexRow>
-                  <h5>Restricted Access</h5>
-                  <Toggle
-                    onClick={this.onToggle}
-                    on={<h2>ON</h2>}
-                    off={<h2>OFF</h2>}
-                    size="xs"
-                    offstyle="danger"
-                    active={this.handleToggle}
-                  />
-
-                </FlexRow>
-              <Button color="success">Activate</Button>
-      </FlexColumn>
+        <Container>
          
-     
-          
-   
-            
-          </CardBody>
-        </Card>
-      </div>
+          <Segment>
+          <Header as="h2">Choose Your Plan</Header>
+          <FlexRow>
+
+          <Option name="MY3" cost="$20" description="Our Basic Plan. Enough data for doing a tiny but of stuff." active />
+          <Option name="MY5" cost="$30" description="Our Basic Plan. Enough data for doing a tiny but of stuff." />
+          <Option name="MY10" cost="$50" description="Our Basic Plan. Enough data for doing a tiny but of stuff." />
+          </FlexRow>
+          </Segment>
+          <Segment vertical>
+           <Checkbox toggle label="Restricted Access"/>
+          </Segment>
+        </Container>
       )
     }
 }

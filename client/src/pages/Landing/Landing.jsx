@@ -1,8 +1,10 @@
 import React from 'react'
 import { Container, Button, Grid, Icon, Segment, Divider, Header, Image } from 'semantic-ui-react'
+import {withRouter} from 'react-router-dom'
 
+const Landing =  props => {
+  const { history } = props;
 
-export default function Landing() {
     return (
      
       <Segment placeholder>
@@ -13,7 +15,9 @@ export default function Landing() {
             <Icon name='wifi' />
               Have a Hotspot?
             </Header>
-            <Button content='Login with TPL' primary size="large" />
+            <Button content='Login with TPL' primary size="large" onClick={
+            () => history.push('/link')
+          }/>
         </Grid.Column>
   
         <Grid.Column textAlign='center'>
@@ -21,7 +25,9 @@ export default function Landing() {
           <Icon name='search' />
               Looking for a Hotspot?
             </Header>
-          <Button content='Reserve Now' icon='signup' size='big' />
+          <Button content='Reserve Now' icon='signup' size='big' onClick={
+            () => history.push('/')
+          }/>
         </Grid.Column>
       </Grid>
   
@@ -30,3 +36,5 @@ export default function Landing() {
    
     )
 }
+
+export default withRouter(Landing)

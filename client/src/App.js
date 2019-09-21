@@ -3,8 +3,8 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Container, Segment, Image } from 'semantic-ui-react'
 import Landing from "./pages/Landing" 
 import LinkDevice from './pages/LinkDevice'
+import NewPlan from './pages/NewPlan'
 import ActivePlans from './pages/ActivePlans'
-// import NewPlan from './pages/NewPlan'
 
 import logo from './logo.svg';
 import './App.css';
@@ -20,8 +20,7 @@ function App() {
 
       <Route path="/" exact component={Landing} />
       <Route path="/link" component={LinkDevice} />
-      {/* <Route path="/plan" component={NewPlan} /> */}
-      <Route path="/activeplans" component={ActivePlans} />
+      <Route path="/plan" component={NewPlan} />
       </Container>
     </Router>
 
