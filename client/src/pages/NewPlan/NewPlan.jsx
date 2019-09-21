@@ -1,8 +1,7 @@
 import React from 'react'
-import { Button, Card, Image } from 'semantic-ui-react'
+import { Container, Menu } from 'semantic-ui-react'
 
 import styled from 'styled-components';
-import Toggle from 'react-bootstrap-toggle';
 
 const PlanBox = styled.button`
   border: 1px solid lightgrey;
@@ -23,83 +22,40 @@ const FlexRow = styled.div`
 `;
 
 export default class NewPlan extends React.Component {  
-  state = {
-    plan: 1,
-    toggleActive: false
-  }
+  state = {}
 
-  handlePlanClicked = (selectedPlan) => {
-    this.setState({plan: selectedPlan})
-  }
+  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
-  handleToggle = () => {
-    this.setState({ toggleActive: !this.state.toggleActive });
-  }
 
     render() {
-      const { plan } = this.state;
+      const { activeItem } = this.state
 
       return (
-        <div>
-        <Card>
-          <CardBody>
-            <CardTitle>New Plan</CardTitle>
-            <CardSubtitle>Choose Your Plan</CardSubtitle>
-            <FlexColumn>
-       
+        <div style={{width : "100%", display: 'flex', justifyContent: 'center'}}>
+        <div style={{maxWidth : "400px"}}>
+          <Container textAlign='center'>
+            <Menu fluid widths={3}>
+              <Menu.Item
+                name='buy'
+                active={activeItem === 'buy'}
+                onClick={this.handleItemClick}
+              />
+              <Menu.Item
+                name='sell'
+                active={activeItem === 'sell'}
+                onClick={this.handleItemClick}
+              />
+              <Menu.Item
+                name='rent'
+                active={activeItem === 'rent'}
+                onClick={this.handleItemClick}
+              />
+            </Menu>
+          </Container>
 
-              <FlexRow>
-                <PlanBox onClick={() => {
-                  this.handlePlanClicked(1)
-                }} style={{ background: plan === 1 ? 'lightgrey' : '' }}>
-                  <FlexColumn>
-                    <div>My3</div>
-                    <div>$10</div>
-                  </FlexColumn>
-                </PlanBox>
-
-                <PlanBox onClick={() => {
-                  this.handlePlanClicked(2)
-                }} style={{ background: plan === 2 ? 'lightgrey' : '' }}>
-                  <FlexColumn>
-                    <div>My5</div>
-                    <div>$20</div>
-                  </FlexColumn>
-                </PlanBox>
-
-                <PlanBox onClick={() => {
-                  this.handlePlanClicked(3)
-                }} style={{ background: plan === 3 ? 'lightgrey' : '' }}>
-                  <FlexColumn>
-                    <div>My10</div>
-                    <div>$30</div>
-                  </FlexColumn>
-                </PlanBox>
-        
-            </FlexRow>
-
-                <FlexRow>
-                  <h5>Restricted Access</h5>
-                  <Toggle
-                    onClick={this.onToggle}
-                    on={<h2>ON</h2>}
-                    off={<h2>OFF</h2>}
-                    size="xs"
-                    offstyle="danger"
-                    active={this.handleToggle}
-                  />
-
-                </FlexRow>
-              <Button color="success">Activate</Button>
-      </FlexColumn>
-         
-     
+        </div>
           
-   
-            
-          </CardBody>
-        </Card>
-      </div>
+        </div>
       )
     }
 }
