@@ -1,13 +1,18 @@
 import React from 'react';
-import Landing from "./pages/Landing"
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+
+import Landing from "./pages/Landing" 
+import LinkDevice from './pages/LinkDevice'
+
 import logo from './logo.svg';
 import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <Landing />
-    </div>
+    <Router>
+      <Route path="/" exact component={Landing} />
+      <Route path="/link" component={LinkDevice} />
+    </Router>
   );
 }
 
