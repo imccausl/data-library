@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 2019_09_21_185650) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "url"
+    t.string "library_device_id"
   end
 
   create_table "plans", force: :cascade do |t|

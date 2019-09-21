@@ -1,5 +1,5 @@
 class DevicesController < ApplicationController
-  before_action :set_device, only: [:show, :update, :destroy]
+  before_action :set_device, only: [:update, :destroy]
 
   # GET /devices
   def index
@@ -10,7 +10,8 @@ class DevicesController < ApplicationController
 
   # GET /devices/1
   def show
-    render json: @device
+    device = Device.where(library_device_id: params[:id]).first
+    render json: device
   end
 
   # POST /devices
