@@ -1,5 +1,5 @@
 import React from 'react';
-import Landing from "./components/Landing"
+import Landing from "./pages/Landing"
 import logo from './logo.svg';
 import './App.css';
 
