@@ -10,12 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_21_183146) do
+ActiveRecord::Schema.define(version: 2019_09_21_183558) do
 
   create_table "devices", force: :cascade do |t|
     t.string "name"
     t.string "location"
     t.integer "deposit_amount"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "plans", force: :cascade do |t|
+    t.string "name"
+    t.integer "device_id"
+    t.string "restrictions"
+    t.string "gigabytes"
+    t.integer "cost"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
