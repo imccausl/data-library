@@ -4,10 +4,7 @@ import { Container, Button, Grid, Icon, Segment, Divider, Header, Image } from '
 
 export default function Landing() {
     return (
-      <Container>
-        <Segment vertical>
-          <Image src='/img/Community_Access_Logo.png' size="medium" />
-        </Segment>
+     
       <Segment placeholder>
       
       <Grid columns={2} relaxed='very' stackable>
@@ -30,6 +27,6 @@ export default function Landing() {
   
       <Divider vertical>Or</Divider>
     </Segment>
-      </Container>
+   
     )
 }
