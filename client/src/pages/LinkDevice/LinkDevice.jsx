@@ -4,9 +4,9 @@ import {
     CardTitle, CardSubtitle, Button, Form, FormGroup, Label, Input, FormText
   } from 'reactstrap';
 
-export default function Landing() {
+export default function LinkDevice() {
     return (
-        <div>
+      <div>
       <Card>
         <CardBody>
           <CardTitle>Link Your Device</CardTitle>
