@@ -1,9 +1,9 @@
 import React from 'react'
-import { Button, Card, Icon, Progress, Header, Image, Message } from 'semantic-ui-react'
+import { Button, Card, Icon, Progress, Header, Image, Message, Placeholder } from 'semantic-ui-react'
 import {withRouter} from 'react-router-dom'
 
 const PlanStatus = props => {
-    const {deviceName, usage, maxUsage, expired, expireDate, deviceId, imageUrl, history} = props;
+    const {deviceName, usage, maxUsage, expired, expireDate, deviceId, imageUrl, history, loading} = props;
 
     return (
         <div style={{margin : "20px", float : "left"}}>
@@ -17,11 +17,32 @@ const PlanStatus = props => {
                     </span>
                 </Card.Content>
                 <Card.Content>
+
+                {loading ? (
+                <Placeholder>
+                  <Placeholder.Image square />
+                </Placeholder>
+              ) : (
                     <div style={{textAlign : "center"}}>
                         <Image src={imageUrl} size="medium" circular />
                         <br /><br />
                         <p style={{color: 'lightgrey'}}>{deviceId}</p>
                     </div>
+                
+              )}
+                    { loading ? (
+
+                    <Placeholder>
+                    <Placeholder.Header>
+                      <Placeholder.Line length='very short' />
+                      <Placeholder.Line length='medium' />
+                    </Placeholder.Header>
+                    <Placeholder.Paragraph>
+                      <Placeholder.Line length='short' />
+                    </Placeholder.Paragraph>
+                  </Placeholder>
+                    ): (
+                    <>
                     { expired && (
                   
                   <div style={{textAlign : "center"}}>
@@ -64,7 +85,10 @@ const PlanStatus = props => {
                     />
                          <div style={{ textAlign: "center" }}>
                      <Button onClick={ () => history.push(`/buy/${deviceId}`)}>Renew Now?</Button>
-                 </div></div>)}
+                 </div></div>)
+                }
+                 </>
+                    )}
                 </Card.Content>
                
                 <Card.Content extra>
@@ -72,6 +96,7 @@ const PlanStatus = props => {
                     <Icon name="clock" />
                     Expires: {expireDate}
                 </Card.Content>
+               
             </Card>
         </div>
     )

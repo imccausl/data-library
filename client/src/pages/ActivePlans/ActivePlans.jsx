@@ -48,16 +48,18 @@ export default class ActivePlans extends React.Component {
 
         <Fetch url={`${API.root}${API.endpoint.devices}/${deviceId}`}>
           {({error, loading, data}) => {
-              let planData;
-             
 
-              if (!loading && data) {
-                const {id, name,location, url} = data
+            
+
+                const id = data ? data.id : null;
+                const name = data ? data.name : null
+                const url = data ? data.url : null
+              
 
                 return (
-                  <PlanStatus deviceName={name} usage={usage} maxUsage={maxUsage} expired={expired} expireDate={expireDate} deviceId={id} imageUrl={url} />
+                  <PlanStatus loading={loading} deviceName={name} usage={usage} maxUsage={maxUsage} expired={expired} expireDate={expireDate} deviceId={id} imageUrl={url} />
                 )
-              }
+              
           }}
         </Fetch>
             </div>
