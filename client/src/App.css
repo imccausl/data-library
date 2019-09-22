@@ -20,3 +20,8 @@
 .App-link {
   color: #09d3ac;
 }
+
+.Plan-Selected {
+  background: #ee2722;
+  color: #fff;
+}
