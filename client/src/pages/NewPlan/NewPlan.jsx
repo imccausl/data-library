@@ -1,6 +1,9 @@
 import React from 'react'
 import { Button, Checkbox, Message, Popup, Icon, Grid, Segment, Container, Header } from 'semantic-ui-react'
+import Fetch from 'react-fetch-component'
 
+import apiRequest from '../../util/apiRequest';
+import API from '../../util/api';
 import styled from 'styled-components';
 
 import Option from './Option'
@@ -25,7 +28,7 @@ const FlexRow = styled.div`
 
 export default class NewPlan extends React.Component {  
   state = {
-    plan: 0,
+    selectedPlan: 0,
     toggleActive: false,
     deviceId: ''
   }
@@ -39,7 +42,7 @@ export default class NewPlan extends React.Component {
   }
 
   handlePlanClicked = (selectedPlan) => {
-    this.setState({plan: selectedPlan})
+    this.setState({selectedPlan})
   }
 
   handleToggle = () => {
@@ -47,7 +50,7 @@ export default class NewPlan extends React.Component {
   }
 
     render() {
-      const { plan, deviceId } = this.state;
+      const { selectedPlan, deviceId } = this.state;
       const { history } = this.props
 
       return (
@@ -57,9 +60,15 @@ export default class NewPlan extends React.Component {
           </Header>
           <Segment>
             <Grid centered divided columns={3}>
-              <Option name="MY3" cost="$20" description="Our Basic Plan" active={plan === 1 ? 'true' : 'false'} callback={() => this.handlePlanClicked(1)}/>
-              <Option name="MY5" cost="$30" description="Our Medium Plan" active={plan === 2 ? 'true' : 'false'} callback={() => this.handlePlanClicked(2)}/>
-              <Option name="MY10" cost="$50" description="Our Best Plan" active={plan === 3 ? 'true' : 'false'} callback={() => this.handlePlanClicked(3)}/>
+              <Fetch url={`${API.root}${API.endpoint.plans}`}>
+                {({loading, error, data}) => {
+                  if (!loading && data) {
+                    return data.map(plan => { 
+                    return <Option key={`plan-options-${plan.id}`} name={plan.name} cost={`$${plan.cost}`} description={plan.restrictions} active={parseInt(selectedPlan) === parseInt(plan.id) ? 'true' : 'false'} callback={() => this.handlePlanClicked(plan.id)}/>}
+                    )
+                  }
+                 }}
+              </Fetch>
             </Grid>
           </Segment>
           <Segment vertical>
@@ -75,7 +84,7 @@ export default class NewPlan extends React.Component {
             <Message warning>
               <p>Your plan will expire on 10/20/2019</p>
             </Message>
-            <Button primary disabled={plan===0} onClick={() => {history.push(`/myplan/${deviceId}/${plan}/0/ok`)}}>Continue to Checkout</Button>
+            <Button primary disabled={selectedPlan===0} onClick={() => {history.push(`/myplan/${deviceId}/${selectedPlan}/0/ok`)}}>Continue to Checkout</Button>
           </Segment>
         </div>
       )

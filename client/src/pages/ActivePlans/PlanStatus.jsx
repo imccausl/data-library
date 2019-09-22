@@ -1,31 +1,53 @@
 import React from 'react'
-import { Button, Card, Icon, Progress, Header, Image, Message } from 'semantic-ui-react'
+import { Button, Card, Icon, Progress, Header, Image, Message, Placeholder } from 'semantic-ui-react'
 import {withRouter} from 'react-router-dom'
 
 const PlanStatus = props => {
-    const {userName, usage, maxUsage, expired, expireDate, deviceId, history} = props;
+    const {deviceName, usage, maxUsage, expired, expireDate, deviceId, imageUrl, history, loading} = props;
 
     return (
         <div style={{margin : "20px", float : "left"}}>
             <Card>
                 <Card.Content>
                     <span style={{ float: "left" }}>
-                        <Header as="h3">{userName}'s Stick</Header>
+                        <Header as="h3">{deviceName}</Header>
                     </span>
                     <span style={{ float: "right" }}>
                         <Icon name="wifi" size="large" />
                     </span>
                 </Card.Content>
                 <Card.Content>
+
+                {loading ? (
+                <Placeholder>
+                  <Placeholder.Image square />
+                </Placeholder>
+              ) : (
                     <div style={{textAlign : "center"}}>
-                        <Image src='/img/wifi_stick.png' size="small" circular />
+                        <Image src={imageUrl} size="medium" circular />
+                        <br /><br />
                         <p style={{color: 'lightgrey'}}>{deviceId}</p>
                     </div>
+                
+              )}
+                    { loading ? (
+
+                    <Placeholder>
+                    <Placeholder.Header>
+                      <Placeholder.Line length='very short' />
+                      <Placeholder.Line length='medium' />
+                    </Placeholder.Header>
+                    <Placeholder.Paragraph>
+                      <Placeholder.Line length='short' />
+                    </Placeholder.Paragraph>
+                  </Placeholder>
+                    ): (
+                    <>
                     { expired && (
                   
                   <div style={{textAlign : "center"}}>
                       <Message icon negative>
-                          <i aria-hidden="true" class="warning sign small icon" style={{padding : "1px"}}></i>
+                          <i aria-hidden="true" className="warning sign small icon" style={{padding : "1px"}}></i>
                           <Message.Header>Your rental has expired!</Message.Header>
                       </Message>
                   </div>
@@ -36,7 +58,7 @@ const PlanStatus = props => {
                  
                   <div style={{textAlign : "center"}}>
                       <Message icon negative>
-                          <i aria-hidden="true" class="tachometer alternate small icon" style={{padding : "1px"}}></i>
+                          <i aria-hidden="true" className="tachometer alternate small icon" style={{padding : "1px"}}></i>
                           <Message.Header>You have hit your data limit!</Message.Header>
                       </Message>
                   </div>
@@ -63,7 +85,10 @@ const PlanStatus = props => {
                     />
                          <div style={{ textAlign: "center" }}>
                      <Button onClick={ () => history.push(`/buy/${deviceId}`)}>Renew Now?</Button>
-                 </div></div>)}
+                 </div></div>)
+                }
+                 </>
+                    )}
                 </Card.Content>
                
                 <Card.Content extra>
@@ -71,6 +96,7 @@ const PlanStatus = props => {
                     <Icon name="clock" />
                     Expires: {expireDate}
                 </Card.Content>
+               
             </Card>
         </div>
     )

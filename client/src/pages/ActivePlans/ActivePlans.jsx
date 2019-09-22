@@ -1,31 +1,28 @@
 import React from 'react'
 import {Header} from 'semantic-ui-react'
-
+import Fetch from 'react-fetch-component'
 import PlanStatus from './PlanStatus';
+import API from '../../util/api';
+import apiRequest from '../../util/apiRequest'
 
 export default class ActivePlans extends React.Component {  
     state = {
-        userName: 'Will',
         expired: false,
         expireDate: '10/20/2019',
-        deviceId: ''
+        deviceId: '',
+        selectedPlan: '',
+        maxUsage: '10'
     }
 
-    componentDidMount() {
-      const { match: { params }} = this.props;
-      let maxUsage = '3'
+    componentWillMount() {
+      const { match: { params } } = this.props;
 
-      if (params.plan === '2') {
-        maxUsage = '5'
-      }
-
-      if (params.plan === '3') {
-        maxUsage = '10'
-      }
+      apiRequest.getPlan(params.plan).then(data => {
+        this.setState({maxUsage: data.gigabytes})})
 
       this.setState({
         usage: params.usage,
-        maxUsage,
+        selectedPlan: params.plan,
         deviceId: params.deviceId
       })
 
@@ -40,16 +37,33 @@ export default class ActivePlans extends React.Component {
     }
 
     render() {
-        const {state} = this;
+        const {usage, maxUsage, expired, expireDate, deviceId, selectedPlan} = this.state;
 
       return (
-        <div style={{margin : "20px"}}>
         <div>
             <Header as='h2'>
                 My Plans
             </Header>
-        </div>
-        <PlanStatus {...state} />
+            <div style={{margin : "20px"}}>
+
+        <Fetch url={`${API.root}${API.endpoint.devices}/${deviceId}`}>
+          {({error, loading, data}) => {
+
+            
+
+                const id = data ? data.id : null;
+                const name = data ? data.name : null
+                const url = data ? data.url : null
+              
+
+                return (
+                  <PlanStatus loading={loading} deviceName={name} usage={usage} maxUsage={maxUsage} expired={expired} expireDate={expireDate} deviceId={id} imageUrl={url} />
+                )
+              
+          }}
+        </Fetch>
+            </div>
+        
         </div>
       )
     }
