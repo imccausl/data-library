@@ -5,12 +5,6 @@ export default props => {
     const {userName, usage, maxUsage, expired, expireDate} = props;
 
     return (
-        <div style={{margin : "20px"}}>
-        <div>
-            <Header as='h2'>
-                Active Plans
-            </Header>
-        </div>
         <div style={{margin : "20px", float : "left"}}>
             <Card>
                 <Card.Content>
@@ -75,6 +69,5 @@ export default props => {
                 </Card.Content>
             </Card>
         </div>
-    </div>
     )
 }

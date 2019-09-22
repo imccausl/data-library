@@ -1,4 +1,5 @@
 import React from 'react'
+import {Header} from 'semantic-ui-react'
 
 import PlanStatus from './PlanStatus';
 
@@ -14,7 +15,14 @@ export default class ActivePlans extends React.Component {
         const {state} = this;
 
       return (
+        <div style={{margin : "20px"}}>
+        <div>
+            <Header as='h2'>
+                My Plans
+            </Header>
+        </div>
         <PlanStatus {...state} />
+        </div>
       )
     }
 }
