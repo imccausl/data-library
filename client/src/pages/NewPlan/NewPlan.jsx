@@ -28,7 +28,7 @@ const FlexRow = styled.div`
 
 export default class NewPlan extends React.Component {  
   state = {
-    plan: 0,
+    selectedPlan: 0,
     toggleActive: false,
     deviceId: ''
   }
@@ -42,7 +42,7 @@ export default class NewPlan extends React.Component {
   }
 
   handlePlanClicked = (selectedPlan) => {
-    this.setState({plan: selectedPlan})
+    this.setState({selectedPlan})
   }
 
   handleToggle = () => {
@@ -50,7 +50,7 @@ export default class NewPlan extends React.Component {
   }
 
     render() {
-      const { plan, deviceId } = this.state;
+      const { selectedPlan, deviceId } = this.state;
       const { history } = this.props
 
       return (
@@ -63,7 +63,8 @@ export default class NewPlan extends React.Component {
               <Fetch url={`${API.root}${API.endpoint.plans}`}>
                 {({loading, error, data}) => {
                   if (!loading && data) {
-                    return data.map(plan => <Option key={`plan-options-${plan.id}`} name={plan.name} cost={`$${plan.cost}`} description={plan.restrictions} active={plan === 1 ? 'true' : 'false'} callback={() => this.handlePlanClicked(1)}/>
+                    return data.map(plan => { 
+                    return <Option key={`plan-options-${plan.id}`} name={plan.name} cost={`$${plan.cost}`} description={plan.restrictions} active={parseInt(selectedPlan) === parseInt(plan.id) ? 'true' : 'false'} callback={() => this.handlePlanClicked(plan.id)}/>}
                     )
                   }
                  }}
@@ -83,7 +84,7 @@ export default class NewPlan extends React.Component {
             <Message warning>
               <p>Your plan will expire on 10/20/2019</p>
             </Message>
-            <Button primary disabled={plan===0} onClick={() => {history.push(`/myplan/${deviceId}/${plan}/0/ok`)}}>Continue to Checkout</Button>
+            <Button primary disabled={selectedPlan===0} onClick={() => {history.push(`/myplan/${deviceId}/${selectedPlan}/0/ok`)}}>Continue to Checkout</Button>
           </Segment>
         </div>
       )

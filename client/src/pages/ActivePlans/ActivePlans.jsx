@@ -1,11 +1,11 @@
 import React from 'react'
 import {Header} from 'semantic-ui-react'
-
+import Fetch from 'react-fetch-component'
 import PlanStatus from './PlanStatus';
+import API from '../../util/api';
 
 export default class ActivePlans extends React.Component {  
     state = {
-        userName: 'Will',
         expired: false,
         expireDate: '10/20/2019',
         deviceId: ''
@@ -40,16 +40,28 @@ export default class ActivePlans extends React.Component {
     }
 
     render() {
-        const {state} = this;
+        const {usage, maxUsage, expired, expireDate, deviceId} = this.state;
 
       return (
-        <div style={{margin : "20px"}}>
         <div>
             <Header as='h2'>
                 My Plans
             </Header>
-        </div>
-        <PlanStatus {...state} />
+            <div style={{margin : "20px"}}>
+
+        <Fetch url={`${API.root}${API.endpoint.devices}/${deviceId}`}>
+          {({error, loading, data}) => {
+            
+              if (!loading && data) {
+                const {id, name,location, url} = data
+                return (
+                  <PlanStatus deviceName={name} usage={usage} maxUsage={maxUsage} expired={expired} expireDate={expireDate} deviceId={id} imageUrl={url} />
+                )
+              }
+          }}
+        </Fetch>
+            </div>
+        
         </div>
       )
     }

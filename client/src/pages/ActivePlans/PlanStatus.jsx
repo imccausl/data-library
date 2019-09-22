@@ -3,14 +3,14 @@ import { Button, Card, Icon, Progress, Header, Image, Message } from 'semantic-u
 import {withRouter} from 'react-router-dom'
 
 const PlanStatus = props => {
-    const {userName, usage, maxUsage, expired, expireDate, deviceId, history} = props;
+    const {deviceName, usage, maxUsage, expired, expireDate, deviceId, imageUrl, history} = props;
 
     return (
         <div style={{margin : "20px", float : "left"}}>
             <Card>
                 <Card.Content>
                     <span style={{ float: "left" }}>
-                        <Header as="h3">{userName}'s Stick</Header>
+                        <Header as="h3">{deviceName}</Header>
                     </span>
                     <span style={{ float: "right" }}>
                         <Icon name="wifi" size="large" />
@@ -18,7 +18,8 @@ const PlanStatus = props => {
                 </Card.Content>
                 <Card.Content>
                     <div style={{textAlign : "center"}}>
-                        <Image src='/img/wifi_stick.png' size="small" circular />
+                        <Image src={imageUrl} size="medium" circular />
+                        <br /><br />
                         <p style={{color: 'lightgrey'}}>{deviceId}</p>
                     </div>
                     { expired && (
