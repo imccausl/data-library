@@ -1,6 +1,9 @@
 import React from 'react'
 import { Button, Checkbox, Message, Popup, Icon, Grid, Segment, Container, Header } from 'semantic-ui-react'
+import Fetch from 'react-fetch-component'
 
+import apiRequest from '../../util/apiRequest';
+import API from '../../util/api';
 import styled from 'styled-components';
 
 import Option from './Option'
@@ -57,9 +60,14 @@ export default class NewPlan extends React.Component {
           </Header>
           <Segment>
             <Grid centered divided columns={3}>
-              <Option name="MY3" cost="$20" description="Our Basic Plan" active={plan === 1 ? 'true' : 'false'} callback={() => this.handlePlanClicked(1)}/>
-              <Option name="MY5" cost="$30" description="Our Medium Plan" active={plan === 2 ? 'true' : 'false'} callback={() => this.handlePlanClicked(2)}/>
-              <Option name="MY10" cost="$50" description="Our Best Plan" active={plan === 3 ? 'true' : 'false'} callback={() => this.handlePlanClicked(3)}/>
+              <Fetch url={`${API.root}${API.endpoint.plans}`}>
+                {({loading, error, data}) => {
+                  if (!loading && data) {
+                    return data.map(plan => <Option key={`plan-options-${plan.id}`} name={plan.name} cost={`$${plan.cost}`} description={plan.restrictions} active={plan === 1 ? 'true' : 'false'} callback={() => this.handlePlanClicked(1)}/>
+                    )
+                  }
+                 }}
+              </Fetch>
             </Grid>
           </Segment>
           <Segment vertical>
