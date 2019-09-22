@@ -21,6 +21,7 @@ function App() {
       <Route path="/" exact component={Landing} />
       <Route path="/link" component={LinkDevice} />
       <Route path="/plan" component={NewPlan} />
+      <Route path="/activeplans" component={ActivePlans} />
       </Container>
     </Router>
 
