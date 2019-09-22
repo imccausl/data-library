@@ -5,8 +5,8 @@ export default props => {
     const { name, cost, description, active, callback} = props
     return (
       
-      <Grid.Column textAlign='center'>
-        <Header as='h2'>{name}</Header>
+      <Grid.Column textAlign='center' className={active == 'true' ? 'Plan-Selected' : ''}>
+        <h2>{name}</h2>
 
         <p>
           <h3>{cost}</h3>
