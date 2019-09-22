@@ -26,7 +26,16 @@ const FlexRow = styled.div`
 export default class NewPlan extends React.Component {  
   state = {
     plan: 0,
-    toggleActive: false
+    toggleActive: false,
+    deviceId: ''
+  }
+
+  componentWillMount() {
+    const { match: { params }} = this.props;
+
+    this.setState({
+      deviceId: params.deviceId
+    })
   }
 
   handlePlanClicked = (selectedPlan) => {
@@ -38,7 +47,8 @@ export default class NewPlan extends React.Component {
   }
 
     render() {
-      const { plan } = this.state;
+      const { plan, deviceId } = this.state;
+      const { history } = this.props
 
       return (
         <div style={{margin : "20px"}}>
@@ -65,10 +75,9 @@ export default class NewPlan extends React.Component {
             <Message warning>
               <p>Your plan will expire on 10/20/2019</p>
             </Message>
-            <Button primary disabled={plan===0}>Continue to Checkout</Button>
+            <Button primary disabled={plan===0} onClick={() => {history.push(`/myplan/${deviceId}/${plan}/0/ok`)}}>Continue to Checkout</Button>
           </Segment>
         </div>
       )
     }
 }
-
