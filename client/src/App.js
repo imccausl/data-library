@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, withRouter } from 'react-router-dom';
+import { BrowserRouter as Router, Route, withRouter, Link } from 'react-router-dom';
 import { Container, Segment, Image, Menu, Icon } from 'semantic-ui-react'
 import Landing from "./pages/Landing" 
 import LinkDevice from './pages/LinkDevice'
@@ -20,7 +20,9 @@ function App() {
         <Segment vertical>
           <div style={{height : "70px"}}>
             <div style={{float : "left"}}>
-              <Image src='/img/Community_Access_Logo.png' size="medium" />
+              <Link to="/">
+                <Image src='/img/Community_Access_Logo.png' size="medium" />
+              </Link>
             </div>
             <div style={{float : "right", marginTop : "10px"}}>
               <Menu stackable>
