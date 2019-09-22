@@ -1,8 +1,9 @@
 import React from 'react'
 import { Button, Card, Icon, Progress, Header, Image, Message } from 'semantic-ui-react'
+import {withRouter} from 'react-router-dom'
 
-export default props => {
-    const {userName, usage, maxUsage, expired, expireDate} = props;
+const PlanStatus = props => {
+    const {userName, usage, maxUsage, expired, expireDate, deviceId, history} = props;
 
     return (
         <div style={{margin : "20px", float : "left"}}>
@@ -18,6 +19,7 @@ export default props => {
                 <Card.Content>
                     <div style={{textAlign : "center"}}>
                         <Image src='/img/wifi_stick.png' size="small" circular />
+                        <p style={{color: 'lightgrey'}}>{deviceId}</p>
                     </div>
                     { expired && (
                   
@@ -41,25 +43,27 @@ export default props => {
                  
               )}
                     <br></br>
-                    Data Usage
-                    <Progress
-                        value={usage}
-                        total="5"
-                        progress="percent"
-                        label={`${usage} GB / ${maxUsage} GB`}
-                        color="red"
-                    />
+                   
 
                     { expired ? (
                          <div style={{textAlign : "center"}}>
                          Please return your device to: 
                          <br></br>
                          
-                         <a href="https://goo.gl/maps/n6Apjby6uCncSFZm7">The CN Tower</a>
+                         <a href="https://goo.gl/maps/Gnb6bHhfz2NYMztN8">Toronto Public Library</a>
                      </div>
-                     ) : ( <div style={{ textAlign: "center" }}>
-                     <Button>Renew Now?</Button>
-                 </div>)}
+                     ) : ( <div>
+                          Data Usage
+                    <Progress
+                        value={usage}
+                        total={maxUsage}
+                        progress="percent"
+                        label={`${usage} GB / ${maxUsage} GB`}
+                        color="red"
+                    />
+                         <div style={{ textAlign: "center" }}>
+                     <Button onClick={ () => history.push('/plan')}>Renew Now?</Button>
+                 </div></div>)}
                 </Card.Content>
                
                 <Card.Content extra>
@@ -71,3 +75,5 @@ export default props => {
         </div>
     )
 }
+
+export default withRouter(PlanStatus)

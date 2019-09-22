@@ -39,10 +39,12 @@ function App() {
             </div>
           </div>
         </Segment>
-        <Route path="/" exact component={Landing} />
-        <Route path="/link" component={LinkDevice} />
-        <Route path="/plan" component={NewPlan} />
-        <Route path="/activeplans" component={ActivePlans} />
+   
+
+      <Route path="/" exact component={Landing} />
+      <Route path="/link" component={LinkDevice} />
+      <Route path="/buy/:deviceId" component={NewPlan} />
+      <Route path="/myplan/:deviceId/:plan/:usage/:devState" component={ActivePlans} />
       </Container>
     </Router>
 
