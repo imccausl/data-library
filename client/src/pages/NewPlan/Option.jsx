@@ -6,6 +6,20 @@ export default props => {
     return (
       
       <Grid.Column textAlign='center' className={active == 'true' ? 'Plan-Selected' : ''}>
+      {name == "MY5" ? <div style={{
+          position : "absolute", 
+          right : 0, 
+          background : "#ee2722", 
+          paddingLeft : "10px",
+          paddingRight : "10px",
+          paddingTop : "5px",
+          paddingBottom : "5px", 
+          color : "#fff",
+          fontWeight : "700"
+          }}>
+          Best Value
+        </div> : null}
+
         <h2>{name}</h2>
 
         <p>
