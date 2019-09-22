@@ -62,7 +62,7 @@ const PlanStatus = props => {
                         color="red"
                     />
                          <div style={{ textAlign: "center" }}>
-                     <Button onClick={ () => history.push('/plan')}>Renew Now?</Button>
+                     <Button onClick={ () => history.push(`/buy/${deviceId}`)}>Renew Now?</Button>
                  </div></div>)}
                 </Card.Content>
                
