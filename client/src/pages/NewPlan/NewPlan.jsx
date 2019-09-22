@@ -41,36 +41,33 @@ export default class NewPlan extends React.Component {
       const { plan } = this.state;
 
       return (
-        <Container>
-          <Segment vertical>
-
-         <Header as="h2">Choose Your Plan</Header>
-          </Segment>
+        <div style={{margin : "20px"}}>
+          <Header as='h2'>
+            Choose Your Plan
+          </Header>
           <Segment>
-          
-          <Grid centered divided columns={3}>
-          <Option name="MY3" cost="$20" description="Our Basic Plan" callback={() => this.handlePlanClicked(1)}/>
-          <Option name="MY5" cost="$30" description="Our Medium Plan" callback={() => this.handlePlanClicked(2)}/>
-          <Option name="MY10" cost="$50" description="Our Best Plan" callback={() => this.handlePlanClicked(3)}/>
-          </Grid>
+            <Grid centered divided columns={3}>
+              <Option name="MY3" cost="$20" description="Our Basic Plan" callback={() => this.handlePlanClicked(1)}/>
+              <Option name="MY5" cost="$30" description="Our Medium Plan" callback={() => this.handlePlanClicked(2)}/>
+              <Option name="MY10" cost="$50" description="Our Best Plan" callback={() => this.handlePlanClicked(3)}/>
+            </Grid>
           </Segment>
           <Segment vertical>
             <FlexRow>
-           <Checkbox toggle label="Restricted Access" style={{ marginRight: '10px'}} />
-           <Popup
-           position="bottom center"
-      trigger={<Icon circular name='question' />}
-      content='Enabling this option removes access to social media and streaming sites.'
-      inverted
-    />
+              <Checkbox toggle label="Restricted Access" style={{ marginRight: '10px'}} />
+              <Popup
+              position="bottom center"
+              trigger={<Icon circular name='question' />}
+              content='Enabling this option removes access to social media and streaming sites.'
+              inverted
+              />
             </FlexRow>
             <Message warning>
-    <p>Your plan will expire on 10/20/2019</p>
-  </Message>
-  <Button primary disabled={plan===0}>Continue to Checkout</Button>
+              <p>Your plan will expire on 10/20/2019</p>
+            </Message>
+            <Button primary disabled={plan===0}>Continue to Checkout</Button>
           </Segment>
-          
-        </Container>
+        </div>
       )
     }
 }
