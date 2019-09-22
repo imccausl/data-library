@@ -3,29 +3,26 @@ import {Header} from 'semantic-ui-react'
 import Fetch from 'react-fetch-component'
 import PlanStatus from './PlanStatus';
 import API from '../../util/api';
+import apiRequest from '../../util/apiRequest'
 
 export default class ActivePlans extends React.Component {  
     state = {
         expired: false,
         expireDate: '10/20/2019',
-        deviceId: ''
+        deviceId: '',
+        selectedPlan: '',
+        maxUsage: '10'
     }
 
-    componentDidMount() {
-      const { match: { params }} = this.props;
-      let maxUsage = '3'
+    componentWillMount() {
+      const { match: { params } } = this.props;
 
-      if (params.plan === '2') {
-        maxUsage = '5'
-      }
-
-      if (params.plan === '3') {
-        maxUsage = '10'
-      }
+      apiRequest.getPlan(params.plan).then(data => {
+        this.setState({maxUsage: data.gigabytes})})
 
       this.setState({
         usage: params.usage,
-        maxUsage,
+        selectedPlan: params.plan,
         deviceId: params.deviceId
       })
 
@@ -40,7 +37,7 @@ export default class ActivePlans extends React.Component {
     }
 
     render() {
-        const {usage, maxUsage, expired, expireDate, deviceId} = this.state;
+        const {usage, maxUsage, expired, expireDate, deviceId, selectedPlan} = this.state;
 
       return (
         <div>
@@ -51,9 +48,12 @@ export default class ActivePlans extends React.Component {
 
         <Fetch url={`${API.root}${API.endpoint.devices}/${deviceId}`}>
           {({error, loading, data}) => {
-            
+              let planData;
+             
+
               if (!loading && data) {
                 const {id, name,location, url} = data
+
                 return (
                   <PlanStatus deviceName={name} usage={usage} maxUsage={maxUsage} expired={expired} expireDate={expireDate} deviceId={id} imageUrl={url} />
                 )

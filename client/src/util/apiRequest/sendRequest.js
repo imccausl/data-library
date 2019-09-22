@@ -1,6 +1,6 @@
 import API from "../api";
 
-async function sendRequest(fetchHandler, path, method, opts = {}) {
+async function sendRequest(fetchHandler, path, method = 'GET', opts = {}) {
   const ROOT_URL = `${API.root}`;
   const headers = Object.assign({}, opts.headers || {}, {
     "Content-Type": "application/json; charset=UTF-8"
@@ -8,14 +8,14 @@ async function sendRequest(fetchHandler, path, method, opts = {}) {
 
   const response = await fetchHandler(
     `${ROOT_URL}${path}`,
-    Object.assign({ method, credentials: "include" }, opts, {
+    Object.assign({ method }, opts, {
       headers,
       body: JSON.stringify(opts.body)
     })
   );
 
   const data = await response.json();
-
+  console.log(data)
   return data;
 }
 

@@ -1,11 +1,11 @@
 import API from '../api';
 
-async function getDevice(requestHandler, deviceId) {
-    const endpoint = `${API.endpoint.device}/${deviceId}`
+async function getPlan(requestHandler, planId) {
+    const endpoint = `${API.endpoint.plans}/${planId}`
   const response = await requestHandler(endpoint);
 
   return response;
 }
 
 
-export { getDevice };
+export { getPlan };

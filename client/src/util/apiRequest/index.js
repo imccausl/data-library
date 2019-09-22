@@ -1,9 +1,9 @@
 
 import sendRequest from './sendRequest';
-import { getDevice } from './handlers';
+import { getPlan } from './handlers';
 
 const apiHandlerWrapper = requestHandler => ({
-  getDevice: (deviceId) => getDevice(requestHandler),
+  getPlan: (planId) => getPlan(requestHandler, planId),
   
 });
 

@@ -26,7 +26,7 @@ const PlanStatus = props => {
                   
                   <div style={{textAlign : "center"}}>
                       <Message icon negative>
-                          <i aria-hidden="true" class="warning sign small icon" style={{padding : "1px"}}></i>
+                          <i aria-hidden="true" className="warning sign small icon" style={{padding : "1px"}}></i>
                           <Message.Header>Your rental has expired!</Message.Header>
                       </Message>
                   </div>
@@ -37,7 +37,7 @@ const PlanStatus = props => {
                  
                   <div style={{textAlign : "center"}}>
                       <Message icon negative>
-                          <i aria-hidden="true" class="tachometer alternate small icon" style={{padding : "1px"}}></i>
+                          <i aria-hidden="true" className="tachometer alternate small icon" style={{padding : "1px"}}></i>
                           <Message.Header>You have hit your data limit!</Message.Header>
                       </Message>
                   </div>
